@@ -69,6 +69,9 @@ class Images(models.Model):
         images = cls.objects.filter(category__name__icontains=category)
         return images
 
+class Category(models.Model):
+    name = models.CharField(max_length=50)
+
 
 
 
