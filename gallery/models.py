@@ -71,6 +71,22 @@ class Images(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
+    
+    
+    def __str__(self):
+        return self.name
+
+    def save_category(self):
+        '''
+        method to save a category
+        '''
+        self.save()
+
+    def delete_category(self):
+        '''
+        method to delete a category
+        '''
+        self.delete()
 
 
 
