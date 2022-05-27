@@ -11,5 +11,7 @@ class Images(models.Model):
     description = models.TextField(null=True, blank=True)
     title = models.CharField(max_length=100)
     posted_by = models.CharField(max_length=40, default='admin')
+    category = models.ForeignKey('Categories', on_delete=models.CASCADE, default=1)
+    location = models.ForeignKey('Locations', on_delete=models.CASCADE, default=1)
 
 
