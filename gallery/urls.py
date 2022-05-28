@@ -1,6 +1,9 @@
 from django.urls import path
+
 from . import views
 
 urlpatterns=[
-    path('',views.welcome,name='welcome')
+    path('',views.index,name='index'),
+    path('search/', views.search, name='search'),
+    path(r'^location/(?P<location>\w+)/', views.image_location, name='location')
 ]
