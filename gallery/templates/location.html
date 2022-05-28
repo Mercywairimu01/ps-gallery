@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+ {% block content %}
+ {% if location_img %}
+ {% for image in location_img %}
+ <img src="{{image.image.url}}" alt="{{image.name}}" class="img">
+
+
+ {% endfor %}
+
+ {% endif %} 
+ {% endblock %}

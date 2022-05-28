@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container-fluid">
+    <!-- Looping through images   -->
+   <div class="row">
+      {% for image in image %}
+       <!--Display images  -->
+       <div class="col-md-4">
+           <div id="img">
+               <img src="{{ image.image.url }}" alt="Image">
+           </div>
+           <!-- <div class="detail">
+               <div class="descript">
+                <h3 class="text-center"> {{ image.title }} </h3>
+
+               </div>
+           </div> -->
+
+       </div>
+       </div>
+       {% empty %}
+       <div class="row">
+         <h2 class="text-center">There are No Images yet!!</h2>
+       </div>
+       {% endfor %}
+     
+</div>
+
+{% endblock %}

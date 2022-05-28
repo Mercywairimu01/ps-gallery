@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+ {% block content %}
+<div class="container">
+
+    {% if images %}
+    <h2 class="text-center" >Found {{ images|length }} images in '{{message}}' category</h2>
+    {% else %}
+    <h2 class="text-center" > Found 0 images for your search {{message}}</h2>
+
+    <a class="d-block mx-auto" href="/">
+        <button class="btn btn-sm btn-info d-block mx-auto">Back Home</button>
+    </a>
+    {% endif %}
+
+
+    {% if images %}
+    <div class="col">
+        {% for image in images %}
+       <img src="{{image.image.url}}" alt="">
+       {% endfor %}
+    </div>
+    {% endif %}
+</div>
+
+ 
+ {% endblock %}
