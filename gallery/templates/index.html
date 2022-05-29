@@ -1,30 +1,97 @@
 {% extends 'base.html' %}
 {% block content %}
+{{block.super}}
 
 <div class="container-fluid">
+
+
+    <li class="nav-item dropdown" style="list-style:none ;">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-location-dot"></i>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% for location in location_img %}
+            <a class="dropdown-item" href="{% url 'index' %}?location={{location.city}}">{{location.city}}</a> 
+            {% endfor %}
+        </ul>
+      </li>
+  
+  
+
     <!-- Looping through images   -->
-   <div class="row">
-      {% for image in image %}
-       <!--Display images  -->
-       <div class="col-md-4">
-           <div id="img">
-               <img src="{{ image.image.url }}" alt="Image">
-           </div>
-           <!-- <div class="detail">
-               <div class="descript">
-                <h3 class="text-center"> {{ image.title }} </h3>
-
+    <div class="wrapper-grid justify-content-center align-items-center text-center">
+        {% for image in images %}
+        <div class="img"  data-target="#modal{{image.id}}">
+            <img src="{{ image.image.url }}" alt="{{ image.title }}" class='img-fluid landing-img'>
+           
+                <ul class="img-info" > 
+                    <div class="nat">
+                    <li class="img-category"><span class="visually-hidden"></span><i class="fa fa-tags" aria-hidden="true"></i> {{image.category}} </li>
+                    <li class="img-location"><span class="visually-hidden"></span><i class="fa fa-thumb-tack" aria-hidden="true"></i> {{image.location}} </li>
                </div>
-           </div> -->
-
-       </div>
-       </div>
-       {% empty %}
-       <div class="row">
-         <h2 class="text-center">There are No Images yet!!</h2>
-       </div>
-       {% endfor %}
-     
+                </ul>
+          
+          </div>
+          <div class="modal" id="modal{{image.id}}">
+            <div class="modal-header">
+                <button class="close-modal">&times;</button>
+            </div>
+              <h2 class='text-center'>{{image.title}}</h2>
+            
+            <div class="body">
+              <img src="{{ image.image.url }}" alt="{{ image.title }}" class='img-fluid overlay-img'>
+              <div class="d-flex justify-content-center align-items-center mt-3 gap-4">
+                <p>Location: {{ image.location}}</p>
+                <p>Category: {{ image.category}}</p>
+              </div>
+              <p>{{ image.description }}</p>
+              <div >
+                <input type="text" value='{{ image.image.url }}' class="copylink" id="copyl{{image.id}}">
+                <span class="btncopy" id="cpybtn{{ image.id }}">Copy Image Link </span>
+              </div>
+            </div>
+          </div>
+          <div id="overlay"></div>
+        {% endfor %}
+    </div>
 </div>
+{% endblock%}
 
-{% endblock %}
+
+
+<!-- <div class="card" data-bs-toggle="modal" data-bs-target="#{{image.id}}" >
+    <div id="img"> 
+    <img src="{{image.image.url}}" alt="{{image.title}}" class="img-info"  id="image">
+   
+        <ul class="img-info">
+            <div class="overlay">
+            <li class="img-category"><span class="visually-hidden"></span><i class="fa fa-tags" aria-hidden="true"></i> {{image.category}} </li>
+            <li class="img-location"><span class="visually-hidden"></span><i class="fa fa-thumb-tack" aria-hidden="true"></i> {{image.location}} </li>
+        
+    </div>
+    </ul>
+</div> -->
+<!-- <div class="modal fade " id="#{{image.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content modalcard">
+            <div class="modal-header">
+                <h5 class="modal-title" id="imageheader">{{image.name}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="{{image.image.url}}" alt="{{image.name}}" class="img-fluid">
+                <p class="imgdesc text-center">{{image.description}}</p>
+                <span class="btn btn-sm btn-outline-success">{{image.category}}</span> <a
+                    href="/location/{{image.location}}" class="btn btn-sm btn-outline-info">{{image.location}}</a>
+            </div>
+            <div class="modal-footer">
+                <input class="form-control input-lg" type="text" value="{{image.image.url}}" id="{{image.id}}.url">
+                <button class="btn btn-success btn-sm" onclick="copyLink('{{image.id}}.url')">Copy</button>
+                <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div> -->

@@ -1,26 +1,41 @@
 {% extends 'base.html' %}
  {% block content %}
-<div class="container">
 
-    {% if images %}
-    <h2 class="text-center" >Found {{ images|length }} images in '{{message}}' category</h2>
-    {% else %}
-    <h2 class="text-center" > Found 0 images for your search {{message}}</h2>
+    <div class="container">
+       <div class="row">
 
-    <a class="d-block mx-auto" href="/">
-        <button class="btn btn-sm btn-info d-block mx-auto">Back Home</button>
-    </a>
-    {% endif %}
+            {% if location_img %}
+            <h2 class="text-center" >Found {{ location_img|length }} images in '{{message}}' category</h2>
+            {% else %}
+            <h2 class="text-center" > Found 0 images for your search {{message}}</h2>
 
+            <a class="d-block mx-auto" href="/">
+                <button class="btn btn-sm btn-info d-block mx-auto">Back Home</button>
+            </a>
+            {% endif %}
 
-    {% if images %}
-    <div class="col">
-        {% for image in images %}
-       <img src="{{image.image.url}}" alt="">
+        </div>
+        
+<div class="row">
+  
+    {% if location_img %}
+       {% for image in location_img %}
+        <div class="col-md-6">
+        <div class="card">
+              <img src="{{ image.image.url }}" alt="Image" class="image" >
+               
+                 <ul class="card-body">
+                     <div class="overlay1" style="display: flex; gap:10px; justify-content:center; list-style:none; margin:-15px ;">
+                     <li class="img-category"><span class="visually-hidden"></span><i class="fa fa-tags" aria-hidden="true"></i> {{image.category}} </li>
+                     <li class="img-location"><span class="visually-hidden"></span><i class="fa fa-thumb-tack" aria-hidden="true"></i> {{image.location}} </li>
+                 </div>
+                 </ul>
+             </div>
+             </div>
        {% endfor %}
-    </div>
+  
     {% endif %}
+    
 </div>
-
- 
+</div>
  {% endblock %}

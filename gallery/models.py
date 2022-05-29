@@ -93,10 +93,10 @@ class Location(models.Model):
     model to handle locations
     '''
     city = models.CharField(max_length=30)
-    country = models.CharField(max_length=30)
+    
     
     def __str__(self):
-        return self.country
+        return self.city
 
     def save_location(self):
         '''
@@ -109,6 +109,9 @@ class Location(models.Model):
         method to delete a location
         '''
         self.delete()
+        
+    class Meta:
+        ordering = ['city']    
 
     @classmethod
     def update_location(cls, id, value):

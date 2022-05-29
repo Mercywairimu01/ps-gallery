@@ -1,11 +1,36 @@
 {% extends 'base.html' %}
- {% block content %}
- {% if location_img %}
- {% for image in location_img %}
- <img src="{{image.image.url}}" alt="{{image.name}}" class="img">
+{% block content %}
 
+<div class="container">
+    <div class="row">
+        {% if location_img %}
+        <h2> Found {{location_img|length }} images </h2>
+        {% else %}
+        <h2> Found 0 images </h2>
+        {% endif %}
+    </div>
 
- {% endfor %}
+    <div class="row">
+       
+            {% if location_img %}
+             {% for image in location_img %}
+             <div class="col-md-5">
+                <div id="img"> 
+               <img src="{{ image.image.url }}" alt="Image" class="image" >
+                   
+                     <ul class="img-info">
+                         <div class="overlay">
+                         <li class="img-category"><span class="visually-hidden"></span><i class="fa fa-tags" aria-hidden="true"></i> {{image.category}} </li>
+                         <li class="img-location"><span class="visually-hidden"></span><i class="fa fa-thumb-tack" aria-hidden="true"></i> {{image.location}} </li>
+                     </div>
+                     </ul>
+                 </div>
+      
+               
+            </div>
+            {% endfor %} 
+            {% endif %}
+        </div>
+    </div>
 
- {% endif %} 
- {% endblock %}
+{% endblock %}
