@@ -30,8 +30,8 @@ document.addEventListener('DOMContentLoaded', function () {
   
     textcopy.forEach((btn, i) => {
       btncopy[i].addEventListener("click", ()=>{
-        link = btn.id.split("copyl");
-        var copytext = document.getElementById('copyl'+link[1])
+        link = btn.id.split("copy");
+        var copytext = document.getElementById('copy')
         copytext.select()      
         copytext.setSelectionRange(0, 99999)
         document.execCommand('copy')
